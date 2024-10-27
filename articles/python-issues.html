@@ -150,12 +150,123 @@
         class="mx-auto flex flex-1 max-w-2xl w-full flex-col space-y-3 px-6 py-16 md:px-0"
       >
         <h1 class="text-4xl font-semibold tracking-tight">
-          python issues and soln
+          pip install abc<br />
+          error: externally-managed-environment
         </h1>
         <h2 class="text-neutral-500">October 27, 2024</h2>
         <section
           class="prose prose-p:mb-4 prose-p:mt-0 prose-p:leading-relaxed prose-p:before:hidden prose-p:after:hidden prose-ul:mt-1 prose-ul:mb-4 prose-ul:pl-8 marker:prose-ul:text-black prose-ol:pl-8 prose-ol:mt-1 prose-ol:mb-4 marker:prose-ol:text-black prose-li:mt-0.5 prose-li:mb-0 prose-li:text-black first:prose-li:mt-0 prose-headings:font-semibold prose-headings:tracking-tight prose-headings:mt-[1.25em] prose-headings:mb-[0.7em] prose-headings:py-0 prose-h1:text-[32px] prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg prose-h5:text-base prose-img:mx-auto prose-img:mt-6 prose-video:mt-6 prose-video:mb-2 prose-code:bg-neutral-100 prose-code:rounded-md prose-code:px-2 prose-code:inline-block prose-code:font-normal prose-code:text-[85%] prose-code:leading-relaxed prose-code:text-black prose-code:before:hidden prose-code:after:hidden prose-code:my-0 prose-pre:bg-neutral-100 prose-pre:text-black prose-pre:mb-4 prose-pre:mt-0 prose-pre:whitespace-pre-wrap prose-pre:rounded-lg prose-pre:px-3 prose-pre:py-3 prose-pre:text-base prose-blockquote:before:hidden prose-blockquote:after:hidden prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-neutral-500 prose-a:font-normal prose-a:underline-offset-2 prose-th:text-left mb-20 max-w-none break-words py-5 text-black"
-        ></section>
+        >
+          <p>
+            In Linux or MacOS, you might have stumbled upon this error some
+            times. This basically occurs when you install all packages in global
+            Python. So it can be avoided with the use of virtual environments.
+            But even still in rare cases it can be present. And few tries later
+            when you still cannot solve it, you might want to delete python out
+            of frustation. So lets discuss how to troubleshoot and solve it.
+            These steps are basic and you shall follow them to troubleshoot any
+            python related problems.
+          </p>
+          <pre><code>
+            subhajitgorai@Subhajits-MacBook-Air newspaper % pip install flask
+            error: externally-managed-environment
+            
+            × This environment is externally managed
+            ╰─> To install Python packages system-wide, try brew install
+                xyz, where xyz is the package you are trying to
+                install.
+                
+                If you wish to install a Python library that isn't in Homebrew,
+                use a virtual environment:
+                
+                python3 -m venv path/to/venv
+                source path/to/venv/bin/activate
+                python3 -m pip install xyz
+                
+                If you wish to install a Python application that isn't in Homebrew,
+                it may be easiest to use 'pipx install xyz', which will manage a
+                virtual environment for you. You can install pipx with
+                
+                brew install pipx
+                
+                You may restore the old behavior of pip by passing
+                the '--break-system-packages' flag to pip, or by adding
+                'break-system-packages = true' to your pip.conf file. The latter
+                will permanently disable this error.
+                
+                If you disable this error, we STRONGLY recommend that you additionally
+                pass the '--user' flag to pip, or set 'user = true' in your pip.conf
+                file. Failure to do this can result in a broken Homebrew installation.
+                
+                Read more about this behavior here: <https://peps.python.org/pep-0668/>
+            
+            note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
+            hint: See PEP 668 for the detailed specification.
+          </code></pre>
+          <h2>Why it occurs?</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem
+            blanditiis, fuga, error animi delectus pariatur deserunt voluptas
+            nostrum nihil, quod recusandae laudantium nemo vel. Nisi ea eius
+            fugit eos neque!
+            <br />
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
+            dignissimos saepe voluptates consequuntur error quisquam consectetur
+            ipsa voluptatibus eveniet? Ullam!
+          </p>
+          <h2>Steps to follow for troublshooting:</h2>
+          <ul>
+            <li>
+              check python version you are using right now. Use
+              <code>python3 -V</code> or <code>python3 --version</code>. [##
+              python3 for MAC OS and python in windows]
+            </li>
+            <li>
+              Check all installed pythons in your device. Use
+              <code>which -a python3.x</code>
+              Remember that in MAC OS the python installed in
+              <code>/usr/bin/</code> is the preinstalled python3.9, So dont
+              tamper it.
+            </li>
+            <li>
+              check <code>PATH</code> env variable. Use <code>echo $PATH</code>.
+              Now look at the python path mentioned there.
+            </li>
+            <li>
+              Use pyenv for python versions management. More about
+              <a href="#">pyenv here.</a> You need homebrew for this so install
+              it using: <code>cmd1</code> or <code>cmd2</code>
+            </li>
+            <li>
+              Check configuration files like <code>~/.zshrc</code>,
+              <code>~/.zprofile</code>. and edit the PATH variable. Add this
+              line there:
+              <pre>
+                <code>
+                # Add pyenv to PATH
+                export PATH="$HOME/.pyenv/bin:$PATH"
+                eval "$(pyenv init --path)"
+                eval "$(pyenv init -)"
+                </code>
+              </pre>
+            </li>
+            <li>
+              Add Homebrew to PATH if not already.
+              <pre>
+                <code>
+                  # Add Homebrew to PATH
+                  export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+                  # Homebrew initialisation
+                  eval "$(/opt/homebrew/bin/brew shellenv)"
+                </code>
+              </pre>
+            </li>
+            <li>
+              save your changes and use <code>source ~/.zshrc</code> or
+              <code>source ~/.zprofile</code>
+            </li>
+          </ul>
+        </section>
       </article>
     </main>
 
